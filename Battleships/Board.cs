@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Battleships
 {
-    class Board
+    public class Board
     {
         #region Properties
 
