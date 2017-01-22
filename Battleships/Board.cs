@@ -83,6 +83,18 @@ namespace Battleships
 
         #endregion
 
+        #region Public Rendering Methods
+
+        internal void RenderBoard()
+        {
+            Console.WriteLine(ConstructTopGridMarkers());
+            for (int i = 0; i < YDimension; i++)
+            {
+                Console.WriteLine(ConstructGameBoardRow(i, OccupiedPositions));
+            }
+        }
+
+        #endregion
         #region Private Methods
 
         /// <summary>
@@ -132,6 +144,43 @@ namespace Battleships
                 markers += $"{i + 1}\t";
             }
             return markers.Substring(0, markers.Length - 1);  //Remove trailing \t char from string
+        }
+
+        /// <summary>
+        /// Renders a row of game board.
+        /// 
+        /// By taking a list of arbitrary positions, this function can render
+        /// either the tracking board or a player's own gameboard.
+        /// </summary>
+        /// <param name="positions"></param>
+        /// <returns></returns>
+        private string ConstructGameBoardRow(int rowNumber, List<Position> positionsOfInterest)
+        {
+            var gameRow = "";
+            for (int i = 0; i < XDimension; i++)
+            {
+                // If the position is Untargeted. See PositionStatus enum
+                if (!positionsOfInterest.Any(position => position.XCoordinate == i))
+                {
+                    gameRow += "-\t";
+                }
+                else
+                {
+                    var thisPosition = positionsOfInterest.Single(position => position.XCoordinate == i);
+                    switch (thisPosition.Status)
+                    {
+                        case PositionStatus.Hit:
+                            gameRow += "H\t";
+                            break;
+                        case PositionStatus.Missed:
+                            gameRow += "M\t";
+                            break;
+                        default:
+                            throw new Exception("Unexpected PositionStatus value when rendering cell on grid.");
+                    }
+                }
+            }
+            return gameRow.Substring(0, gameRow.Length - 1);  // Remove trailing \t character
         }
 
         #endregion
