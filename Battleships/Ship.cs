@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Battleships
 {
-    public  class Ship
+    public class Ship
     {
         #region Properties
 
@@ -18,7 +18,7 @@ namespace Battleships
         /// </summary>
         public List<Position> Locations { get; set; }
 
-        public bool isSunk => Locations.Select(location => location.Hit == true).ToList().Count == Size;
+        public bool isSunk => Locations.Select(location => location.Status == PositionStatus.Hit).ToList().Count == Size;
 
         #endregion
 
