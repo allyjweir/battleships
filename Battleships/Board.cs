@@ -80,7 +80,7 @@ namespace Battleships
             XDimension = _defaultXDimension;
             YDimension = _defaultYDimension;
             _defaultShipsDefinitions.ForEach(definition => Fleet.Add(new Ship(definition)));
-            Fleet.ForEach(ship => ship.Locations = PositionShip(ship.Size));
+            Fleet.ForEach(ship => ship.Locations = RandomlyPositionShip(ship.Size));
         }
 
         #endregion
@@ -98,7 +98,7 @@ namespace Battleships
         /// grid dimensions
         /// </summary>
         /// <param name="size">Size of ship to be placed.</param>
-        private List<Position> PositionShip(int size)
+        private List<Position> RandomlyPositionShip(int size)
         {
             var futureLocation = new List<Position>();
             var random = new Random();
