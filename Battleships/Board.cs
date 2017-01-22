@@ -125,6 +125,17 @@ namespace Battleships
         /// <returns></returns>
         private bool isValidPosition(List<Position> locations)
             => !locations.Any(position => OccupiedPositions.Contains(position)); 
+
+        private string ConstructTopGridMarkers()
+        {
+            var markers = "";
+            for (int i = 0; i < XDimension; i++)
+            {
+                markers += $"{i + 1}\t";
+            }
+            return markers.Substring(0, markers.Length - 1);  //Remove trailing \t char from string
+        }
+
         #endregion
 
     }
