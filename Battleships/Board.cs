@@ -111,7 +111,7 @@ namespace Battleships
             
             if(isValidPosition(futureLocation))
             {
-                return PositionShip(size);
+                return RandomlyPositionShip(size);
             }
 
             return futureLocation;
