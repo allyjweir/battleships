@@ -183,6 +183,29 @@ namespace Battleships
             return gameRow.Substring(0, gameRow.Length - 1);  // Remove trailing \t character
         }
 
+        /// <summary>
+        /// Based on game rules, check if a potential shot is valid to strike the enemy
+        /// </summary>
+        /// <param name="target">The coordniates a player is targeting such as "A7".</param>
+        /// <returns>If the shot obeys the game rules outlined and is therefore valid.</returns>
+        public bool isValidShot(string target)
+        {
+            if(isValidCoordinates(target))
+            {
+                var newTargetPosition = new Position(target.Substring(0, 1).ToCharArray()[0],
+                                                     int.Parse(target.Substring(1,1)));
+                return !TargetedPositions.Contains(newTargetPosition);
+            }
+            return false;
+        }
+
+        private bool isValidCoordinates(string target)
+        {
+            return target.Length == 2
+                && target.Substring(0, 1) == "A"
+                && Enumerable.Range(0, XDimension).Contains(int.Parse(target.Substring(1, 1)));
+        }
+
         #endregion
 
     }
