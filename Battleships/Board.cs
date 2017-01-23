@@ -34,6 +34,9 @@ namespace Battleships
         public int XDimension { get; }
         public int YDimension { get; }
 
+        public IList<char> XDimensionLetters
+            => Enumerable.Range(1, XDimension).Select(val => Convert.ToChar(65 + (val - 1))).ToList();
+
         /// <summary>
         /// List of currently positioned <see cref="Ship"/> on the board
         /// </summary>
@@ -202,8 +205,9 @@ namespace Battleships
         private bool isValidCoordinates(string target)
         {
             return target.Length == 2
-                && target.Substring(0, 1) == "A"
-                && Enumerable.Range(0, XDimension).Contains(int.Parse(target.Substring(1, 1)));
+                && XDimensionLetters.Contains(char.Parse(target.Substring(0, 1)))
+                && 0 < int.Parse(target.Substring(1, 1))
+                && int.Parse(target.Substring(1,1)) >= YDimension;
         }
 
         #endregion
