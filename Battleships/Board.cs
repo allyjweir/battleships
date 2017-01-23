@@ -97,7 +97,13 @@ namespace Battleships
             }
         }
 
+        internal void RenderTrackingBoard()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
+
         #region Private Methods
 
         /// <summary>
