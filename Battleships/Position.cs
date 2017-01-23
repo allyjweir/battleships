@@ -6,14 +6,14 @@ namespace Battleships
     {
         #region Properties
 
-        public int XCoordinate { get; }
-        public char YCoordinate { get; }
+        public char XCoordinate { get; }
+        public int YCoordinate { get; }
         public PositionStatus Status { get; set; }
         #endregion
 
         #region Constructors
 
-        public Position(int x, char y)
+        public Position(char x, int y)
         {
             XCoordinate = x;
             YCoordinate = y;
@@ -22,8 +22,8 @@ namespace Battleships
 
         public Position(int x, int y)
         {
-            XCoordinate = x;
-            YCoordinate = ToCharValue(y);
+            XCoordinate = ToCharValue(x);
+            YCoordinate = y;
             Status = PositionStatus.Untargeted;
         }
 
@@ -38,8 +38,8 @@ namespace Battleships
         /// </summary>
         public Tuple<int, int> ToIntegerPosition()
         {
-            var yCoordinateAsInteger = char.ToUpper(YCoordinate) -64;
-            return new Tuple<int, int>(XCoordinate, yCoordinateAsInteger);
+            var xCoordinateAsInteger = char.ToUpper(XCoordinate) -64;
+            return new Tuple<int, int>(xCoordinateAsInteger, YCoordinate);
         }
 
         #endregion
